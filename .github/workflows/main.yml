@@ -1,0 +1,24 @@
+name: Download Android SDK Files
+
+on:
+  workflow_dispatch: # این گزینه به شما اجازه می‌دهد تا اجرای آن را دستی شروع کنید
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Platform 29 (Android 10)
+        run: |
+          curl -L -o platform-29_r03.zip "https://dl.google.com/android/repository/platform-29_r03.zip"
+
+      - name: Download Command Line Tools (Windows)
+        run: |
+          curl -L -o commandlinetools-win.zip "https://dl.google.com/android/repository/commandlinetools-win-11076708_latest.zip"
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-sdk-files
+          path: |
+            platform-29_r03.zip
+            commandlinetools-win.zip
